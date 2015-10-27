@@ -13,6 +13,8 @@ public class Grupo {
     private List<Link> links;
     private String id;
     private String nombre;
+    private long lastModified;
+    private long creationTimestamp;
 
     public List<Link> getLinks() {
         return links;
@@ -36,8 +38,26 @@ public class Grupo {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+
+    }
+    public long getCreationTimestamp() {
+        return creationTimestamp;
+    }
+
+    public void setCreationTimestamp(long creationTimestamp) {
+        this.creationTimestamp = creationTimestamp;
+    }
+
+    public long getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(long lastModified) {
+        this.lastModified = lastModified;
     }
 }
+
+
 
 
 

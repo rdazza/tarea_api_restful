@@ -16,6 +16,9 @@ public class Respuesta {
     private String temaid;
     private String userid;
     private String Respuesta;
+    private String creator;
+    private long creationTimestamp;
+    private long lastModified;
 
     public List<Link> getLinks() {
         return links;
@@ -55,5 +58,28 @@ public class Respuesta {
 
     public void setRespuesta(String respuesta) {
         Respuesta = respuesta;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+    public long getCreationTimestamp() {
+        return creationTimestamp;
+    }
+
+    public void setCreationTimestamp(long creationTimestamp) {
+        this.creationTimestamp = creationTimestamp;
+    }
+
+    public long getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(long lastModified) {
+        this.lastModified = lastModified;
     }
 }

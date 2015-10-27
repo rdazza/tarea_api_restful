@@ -13,7 +13,6 @@ import java.util.List;
 public class User {
     @InjectLinks({})
     private List<Link> links;
-
     private String id;
     private String loginid;
     private String email;

@@ -38,7 +38,7 @@ CREATE TABLE tema (
 	id BINARY(16) NOT NULL,
 	userid BINARY(16) NOT NULL,
 	grupoid BINARY(16) NOT NULL,
-	nombre VARCHAR(250) NOT NULL,
+	nombre VARCHAR(288) NOT NULL,
 	comentario VARCHAR(400) NOT NULL,	
 	PRIMARY KEY (id),
 	FOREIGN KEY (userid) REFERENCES users(id) on delete cascade,

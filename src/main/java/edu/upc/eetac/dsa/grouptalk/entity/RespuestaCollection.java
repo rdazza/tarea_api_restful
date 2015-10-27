@@ -11,7 +11,7 @@ public class RespuestaCollection {
     private List<Link> links;
     private long newestTimestamp;
     private long oldestTimestamp;
-    private List<Grupo> respuestas = new ArrayList<>();
+    private List<Respuesta> respuestas = new ArrayList<>();
 
     public List<Link> getLinks() {
         return links;
@@ -37,11 +37,11 @@ public class RespuestaCollection {
         this.oldestTimestamp = oldestTimestamp;
     }
 
-    public List<Grupo> getRespuestas() {
+    public List<Respuesta> getRespuestas() {
         return respuestas;
     }
 
-    public void setRespuestas(List<Grupo> respuestas) {
+    public void setRespuestas(List<Respuesta> respuestas) {
         this.respuestas = respuestas;
     }
 }
