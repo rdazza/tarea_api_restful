@@ -28,14 +28,6 @@ public class AuthRequestFilter implements ContainerRequestFilter {
     public void filter(ContainerRequestContext requestContext) throws IOException {
 
 
-
-
-        if (requestContext.getUriInfo().getPath().equals("myresource") && requestContext.getMethod().equals("GET"))
-            return;
-
-
-
-
         if(Authorized.getInstance().isAuthorized(requestContext))
             return;
 

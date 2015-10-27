@@ -11,12 +11,12 @@
       "POST"
     ]
   },
-  {
+  /*{
     "path": "(?i)users/([0-9a-f]{32})?",
     "methods": [
       "GET"
     ]
-  },
+  },*/
   /*{
     "path": "(?i)grupos/?([0-9a-f]{32})?",
     "methods": ["GET"]
