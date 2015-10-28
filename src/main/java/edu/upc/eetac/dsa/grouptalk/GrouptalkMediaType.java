@@ -1,7 +1,7 @@
 package edu.upc.eetac.dsa.grouptalk;
 
 /**
- * Created by ruben on 16/10/15.
+ * Created by ruben on 27/10/15.
  */
 public interface GrouptalkMediaType {
         public final static String GROUPTALK_AUTH_TOKEN = "application/vnd.dsa.grouptalk.auth-token+json";

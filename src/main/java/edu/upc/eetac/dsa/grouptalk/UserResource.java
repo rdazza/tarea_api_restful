@@ -14,7 +14,7 @@ import java.net.URISyntaxException;
 import java.sql.SQLException;
 
 /**
- * Created by ruben on 16/10/15.
+ * Created by ruben on 25/10/15.
  */
 @Path("users")
 
@@ -44,6 +44,10 @@ public class UserResource {
         URI uri = new URI(uriInfo.getAbsolutePath().toString() + "/" + user.getId());
         return Response.created(uri).type(GrouptalkMediaType.GROUPTALK_AUTH_TOKEN).entity(authenticationToken).build();
     }
+
+
+
+
     @Path("/{id}")
     @GET
     @Produces(GrouptalkMediaType.GROUPTALK_USER)
@@ -58,6 +62,10 @@ public class UserResource {
             throw new NotFoundException("User with id = "+id+" doesn't exist");
         return user;
     }
+
+
+
+
 
     @Path("/{id}")
     @PUT
@@ -83,6 +91,11 @@ public class UserResource {
         }
         return user;
     }
+
+
+
+
+
     @Path("/{id}")
     @DELETE
     public void deleteUser(@PathParam("id") String id){

@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class GrupoDAOImpl implements GrupoDAO {
 
     @Override
-    public Grupo createGrupo(String nombre) throws SQLException {
+    public Grupo createGrupo(String userid, String nombre) throws SQLException {
         Connection connection = null;
         PreparedStatement stmt = null;
         String id = null;

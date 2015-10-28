@@ -36,6 +36,7 @@ public class AuthTokenDAOImpl implements AuthTokenDAO {
                 rs = stmt.executeQuery();
                 while (rs.next()) {
                     String role = rs.getString("role");
+                    System.out.println("JOOODDDEEEEERRRR [" +role+"]");
                     userInfo.getRoles().add(Role.valueOf(role));
                 }
             }

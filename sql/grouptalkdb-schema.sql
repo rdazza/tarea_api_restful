@@ -14,7 +14,7 @@ CREATE TABLE users (
 
 CREATE TABLE user_roles (
     userid BINARY(16) NOT NULL,
-    role ENUM ('registrado','administrador'),
+    role ENUM ('registered','admin'),
     PRIMARY KEY (userid, role),
     FOREIGN KEY (userid) REFERENCES users(id) on delete cascade
     
