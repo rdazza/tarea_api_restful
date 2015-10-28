@@ -33,7 +33,6 @@ public class Authorized {
         return instance;
     }
 
-    // se pide cambiar en el apartado de CORS
 
     public boolean isAuthorized(ContainerRequestContext requestContext) {
         String path = requestContext.getUriInfo().getPath();
@@ -46,19 +45,6 @@ public class Authorized {
         }
         return false;
     }
-   // el de aqui abajo es el que se pide en CORS;*/
-    /*public boolean isAuthorized(ContainerRequestContext requestContext) {
-        String path = requestContext.getUriInfo().getPath();
-        String method = requestContext.getMethod();
-        if(method.equals("OPTIONS"))
-            return true;
-        if(path.isEmpty() && method.equals("GET") && requestContext.getHeaderString("X-Auth-Token") == null)
-            return true;
-        for(AuthorizedResource r : authorizedResourcesList){
-            if(r.getPattern().matcher(path).matches() && r.getMethods().contains(method) )
-                return true;
-        }
-        return false;
-    }*/
+
 }
 
