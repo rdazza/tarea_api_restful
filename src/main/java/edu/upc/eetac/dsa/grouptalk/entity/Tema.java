@@ -17,6 +17,8 @@ public class Tema {
     private String grupoid;
     private String nombre;
     private String comentario;
+    private long lastModified;
+    private long creationTimestamp;
 
     public List<Link> getLinks() {
         return links;
@@ -64,5 +66,21 @@ public class Tema {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
+    }
+
+    public long getCreationTimestamp() {
+        return creationTimestamp;
+    }
+
+    public void setCreationTimestamp(long creationTimestamp) {
+        this.creationTimestamp = creationTimestamp;
+    }
+
+    public long getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(long lastModified) {
+        this.lastModified = lastModified;
     }
 }

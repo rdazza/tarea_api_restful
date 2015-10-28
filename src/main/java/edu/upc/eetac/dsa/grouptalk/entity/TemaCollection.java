@@ -11,7 +11,7 @@ public class TemaCollection {
     private List<Link> links;
     private long newestTimestamp;
     private long oldestTimestamp;
-    private List<Grupo> temas = new ArrayList<>();
+    private List<Tema> temas = new ArrayList<>();
 
     public List<Link> getLinks() {
         return links;
@@ -37,11 +37,11 @@ public class TemaCollection {
         this.oldestTimestamp = oldestTimestamp;
     }
 
-    public List<Grupo> getTemas() {
+    public List<Tema> getTemas() {
         return temas;
     }
 
-    public void setTemas(List<Grupo> temas) {
+    public void setTemas(List<Tema> temas) {
         this.temas = temas;
     }
 }
