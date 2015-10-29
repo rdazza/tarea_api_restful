@@ -13,6 +13,6 @@ public interface TemaDAO {
     public Tema createTema(String userid, String grupoid, String nombre, String comentario) throws SQLException;
     public Tema getTemaById(String id) throws SQLException;
     public TemaCollection getTemas() throws SQLException;
-    public Tema updateTemas(String id, String grupoid, String nombre, String comentario) throws SQLException;
+    public Tema updateTemas(String id, String grupoid, String comentario) throws SQLException;
     public boolean deleteTema(String id) throws SQLException;
 }
