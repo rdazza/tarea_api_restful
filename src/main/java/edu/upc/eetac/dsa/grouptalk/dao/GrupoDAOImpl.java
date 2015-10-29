@@ -19,6 +19,7 @@ public class GrupoDAOImpl implements GrupoDAO {
         Connection connection = null;
         PreparedStatement stmt = null;
         String id = null;
+      ;
         try {
             connection = Database.getConnection();
 
@@ -33,6 +34,7 @@ public class GrupoDAOImpl implements GrupoDAO {
             stmt.setString(1, id);
             stmt.setString(2, nombre);
             stmt.executeUpdate();
+
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -62,15 +64,17 @@ public class GrupoDAOImpl implements GrupoDAO {
                 grupo = new Grupo();
                 grupo.setId(rs.getString("id"));
                 grupo.setNombre(rs.getString("nombre"));
-                grupo.setCreationTimestamp(rs.getTimestamp("creation_timestamp").getTime());
-                grupo.setLastModified(rs.getTimestamp("last_modified").getTime());
+                //grupo.setCreationTimestamp(rs.getTimestamp("creation_timestamp").getTime());
+                //grupo.setLastModified(rs.getTimestamp("last_modified").getTime());
             }
+
         } catch (SQLException e) {
             throw e;
         } finally {
             if (stmt != null) stmt.close();
             if (connection != null) connection.close();
         }
+
         return grupo;
     }
 
@@ -90,8 +94,8 @@ public class GrupoDAOImpl implements GrupoDAO {
                 Grupo grupo = new Grupo();
                 grupo.setId(rs.getString("id"));
                 grupo.setNombre(rs.getString("nombre"));
-                grupo.setCreationTimestamp(rs.getTimestamp("creation_timestamp").getTime());
-                grupo.setLastModified(rs.getTimestamp("last_modified").getTime());
+               // grupo.setCreationTimestamp(rs.getTimestamp("creation_timestamp").getTime());
+               // grupo.setLastModified(rs.getTimestamp("last_modified").getTime());
                 if (first) {
                     grupoCollection.setNewestTimestamp(grupo.getLastModified());
                     first = false;

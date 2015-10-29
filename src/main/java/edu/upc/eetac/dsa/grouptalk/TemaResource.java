@@ -8,6 +8,7 @@ import edu.upc.eetac.dsa.grouptalk.entity.Tema;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.net.URI;
+import javax.ws.rs.core.UriInfo;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 
@@ -20,29 +21,35 @@ public class TemaResource {
     private SecurityContext securityContext;
 
     @POST
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    @Produces(GrouptalkMediaType.GROUPTALK_TEMA)
-    public Response createTema(@FormParam("nombre") String nombre, @FormParam("comentario") String comentario, @Context UriInfo uriInfo) throws URISyntaxException {
+    //@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    //@Produces(GrouptalkMediaType.GROUPTALK_TEMA)
+    public Response createTema(@FormParam("userid") String userid,@FormParam("grupoid") String grupoid, @FormParam("nombre") String nombre, @FormParam("comentario") String comentario, @Context UriInfo uriInfo) throws URISyntaxException {
+    //public Response createTema(@FormParam("nombre") String nombre, @FormParam("comentario") String comentario, @Context UriInfo uriInfo) throws URISyntaxException {
+
         if (nombre == null)
             throw new BadRequestException("all parameters are mandatory");
+
         TemaDAO temaDAO = new TemaDAOImpl();
         Tema tema = null;
+
         AuthToken authenticationToken = null;
         try {
-            tema = temaDAO.createTema(securityContext.getUserPrincipal().getName(), tema.getGrupoid(), nombre, comentario);
-
+            //tema = temaDAO.createTema(securityContext.getUserPrincipal().getName(), tema.getGrupoid(), nombre);
+            tema = temaDAO.createTema(userid, grupoid, nombre, comentario);
         } catch (SQLException e) {
             throw new InternalServerErrorException();
         }
-        URI uri = new URI(uriInfo.getAbsolutePath().toString() + "/" + tema.getId());
+        //URI uri = new URI(uriInfo.getAbsolutePath().toString() + "/" + tema.getId());
+        URI uri = new URI(uriInfo.getAbsolutePath().toString());
         return Response.created(uri).type(GrouptalkMediaType.GROUPTALK_TEMA).entity(tema).build();
     }
 
-
+/*
     @Path("/{id}")
     @GET
     @Produces(GrouptalkMediaType.GROUPTALK_TEMA)
-    public Response getTema(@PathParam("id") String id, @Context Request request) {
+    //public Response getTema(@PathParam("id") String id, @Context Request request) {
+    public Response getTema(@PathParam("id") String id) {
         // Create cache-control
         CacheControl cacheControl = new CacheControl();
         Tema tema = null;
@@ -72,14 +79,34 @@ public class TemaResource {
         } catch (SQLException e) {
             throw new InternalServerErrorException();
         }
+    }*/
+
+
+    @Path("/{id}")
+    @GET
+    @Produces(GrouptalkMediaType.GROUPTALK_TEMA)
+    public Tema getTema(@PathParam("id") String id) {
+        // Create cache-control
+        Tema tema = null;
+
+        try {
+            tema = (new TemaDAOImpl().getTemaById(id));
+        } catch (SQLException e) {
+            throw new InternalServerErrorException(e.getMessage());
+        }
+        if (tema == null) {
+            throw new NotFoundException("tema with id = " + id + " doesn't exist");
+        }
+        return tema;
+
     }
-/*
+
     @Path("/{id}")
     @PUT
     @Consumes(GrouptalkMediaType.GROUPTALK_TEMA)
     @Produces(GrouptalkMediaType.GROUPTALK_TEMA)
     public Tema updateTema(@PathParam("id") String id, Tema tema) {
-        if(tema == null)
+        /*if(tema == null)
             throw new BadRequestException("entity is null");
         if(!id.equals(tema.getId()))
             throw new BadRequestException("path parameter id and entity parameter id doesn't match");
@@ -87,10 +114,10 @@ public class TemaResource {
         String userid = securityContext.getUserPrincipal().getName();
         if(!userid.equals(tema.getUserid()))
             throw new ForbiddenException("operation not allowed");
-
+*/
         TemaDAO temaDAO = new TemaDAOImpl();
         try {
-            tema = temaDAO.updateTemas(id, tema.getGrupoid(), tema.getNombre(), tema.getComentario());
+            tema = temaDAO.updateTemas(id, tema.getComentario());
             if(tema == null)
                 throw new NotFoundException("Tema with id = "+id+" doesn't exist");
         } catch (SQLException e) {
@@ -98,7 +125,7 @@ public class TemaResource {
         }
         return tema;
     }
-   */
+
     @Path("/{id}")
     @DELETE
     public void deleteTema(@PathParam("id") String id) {

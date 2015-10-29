@@ -40,6 +40,7 @@ public class Grupo {
         this.nombre = nombre;
 
     }
+
     public long getCreationTimestamp() {
         return creationTimestamp;
     }

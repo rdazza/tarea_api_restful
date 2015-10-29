@@ -21,7 +21,7 @@ public class RespuestaDAOImpl implements RespuestaDAO {
         try {
             connection = Database.getConnection();
 
-            stmt = connection.prepareStatement(UserDAOQuery.UUID);
+            stmt = connection.prepareStatement(RespuestaDAOQuery.UUID);
             ResultSet rs = stmt.executeQuery();
             if (rs.next())
                 id = rs.getString(1);
@@ -63,10 +63,10 @@ public class RespuestaDAOImpl implements RespuestaDAO {
                 respuesta = new Respuesta();
                 respuesta.setId(rs.getString("id"));
                 respuesta.setTemaid(rs.getString("temaid"));
-                respuesta.setCreator(rs.getString("fullname"));
+                //respuesta.setCreator(rs.getString("fullname"));
                 respuesta.setRespuesta(rs.getString("respuesta"));
-                respuesta.setCreationTimestamp(rs.getTimestamp("creation_timestamp").getTime());
-                respuesta.setLastModified(rs.getTimestamp("last_modified").getTime());
+               // respuesta.setCreationTimestamp(rs.getTimestamp("creation_timestamp").getTime());
+               // respuesta.setLastModified(rs.getTimestamp("last_modified").getTime());
             }
         } catch (SQLException e) {
             throw e;
@@ -95,14 +95,14 @@ public class RespuestaDAOImpl implements RespuestaDAO {
                 respuesta.setTemaid(rs.getString("temaid"));
                 respuesta.setUserid(rs.getString("userid"));
                 respuesta.setRespuesta(rs.getString("respuesta"));
-                respuesta.setCreationTimestamp(rs.getTimestamp("creation_timestamp").getTime());
-                respuesta.setLastModified(rs.getTimestamp("last_modified").getTime());
-                if (first) {
+                //respuesta.setCreationTimestamp(rs.getTimestamp("creation_timestamp").getTime());
+                //respuesta.setLastModified(rs.getTimestamp("last_modified").getTime());
+                /*if (first) {
                     respuestaCollection.setNewestTimestamp(respuesta.getLastModified());
                     first = false;
                 }
                 respuestaCollection.setOldestTimestamp(respuesta.getLastModified());
-                respuestaCollection.getRespuestas().add(respuesta);
+                respuestaCollection.getRespuestas().add(respuesta);*/
             }
         } catch (SQLException e) {
             throw e;

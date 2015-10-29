@@ -24,23 +24,28 @@ public class GrupoResource {
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(GrouptalkMediaType.GROUPTALK_GRUPO)
-    public Response createSting(@FormParam("nombre") String nombre, @Context UriInfo uriInfo) throws URISyntaxException {
+    public Response createGrupo(@FormParam("nombre") String nombre, @Context UriInfo uriInfo) throws URISyntaxException {
         if (nombre == null)
             throw new BadRequestException("all parameters are mandatory");
         GrupoDAO grupoDAO = new GrupoDAOImpl();
         Grupo grupo = null;
         AuthToken authenticationToken = null;
         try {
-            grupo = grupoDAO.createGrupo(securityContext.getUserPrincipal().getName(), nombre);
+           grupo = grupoDAO.createGrupo(securityContext.getUserPrincipal().getName(), nombre);
+
+
 
         } catch (SQLException e) {
             throw new InternalServerErrorException();
         }
-        URI uri = new URI(uriInfo.getAbsolutePath().toString() + "/" + grupo.getId());
+        String id= grupo.getId();
+
+
+          URI uri = new URI(uriInfo.getAbsolutePath().toString() );
+        System.out.println(uri);
         return Response.created(uri).type(GrouptalkMediaType.GROUPTALK_GRUPO).entity(grupo).build();
+
     }
-
-
 
     @Path("/{id}")
     @GET

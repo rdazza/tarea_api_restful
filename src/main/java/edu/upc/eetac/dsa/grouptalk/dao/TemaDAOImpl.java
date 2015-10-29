@@ -1,6 +1,7 @@
 package edu.upc.eetac.dsa.grouptalk.dao;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import edu.upc.eetac.dsa.grouptalk.entity.Tema;
 import edu.upc.eetac.dsa.grouptalk.entity.TemaCollection;
 
@@ -13,7 +14,9 @@ import java.sql.SQLException;
  * Created by ruben on 26/10/15.
  */
 
+
 public class TemaDAOImpl implements TemaDAO {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
 
     @Override
     public Tema createTema(String userid, String grupoid, String nombre, String comentario) throws SQLException {
@@ -23,7 +26,7 @@ public class TemaDAOImpl implements TemaDAO {
         try {
             connection = Database.getConnection();
 
-            stmt = connection.prepareStatement(UserDAOQuery.UUID);
+            stmt = connection.prepareStatement(TemaDAOQuery.UUID);
             ResultSet rs = stmt.executeQuery();
             if (rs.next())
                 id = rs.getString(1);
@@ -66,9 +69,13 @@ public class TemaDAOImpl implements TemaDAO {
             if (rs.next()) {
                 tema = new Tema();
                 tema.setId(rs.getString("id"));
+                tema.setUserid(rs.getString("userid"));
+                tema.setGrupoid(rs.getString("grupoid"));
                 tema.setNombre(rs.getString("nombre"));
-                tema.setCreationTimestamp(rs.getTimestamp("creation_timestamp").getTime());
-                tema.setLastModified(rs.getTimestamp("last_modified").getTime());
+                tema.setComentario(rs.getString("comentario"));
+
+                //tema.setCreationTimestamp(rs.getTimestamp("creation_timestamp").getTime());
+                //tema.setLastModified(rs.getTimestamp("last_modified").getTime());
             }
         } catch (SQLException e) {
             throw e;
@@ -98,13 +105,13 @@ public class TemaDAOImpl implements TemaDAO {
                 tema.setUserid(rs.getString("userid"));
                 tema.setNombre(rs.getString("nombre"));
                 tema.setComentario(rs.getString("comentario"));
-                tema.setCreationTimestamp(rs.getTimestamp("creation_timestamp").getTime());
-                tema.setLastModified(rs.getTimestamp("last_modified").getTime());
-                if (first) {
+                //tema.setCreationTimestamp(rs.getTimestamp("creation_timestamp").getTime());
+                //tema.setLastModified(rs.getTimestamp("last_modified").getTime());
+                /*if (first) {
                     temaCollection.setNewestTimestamp(tema.getLastModified());
                     first = false;
-                }
-                temaCollection.setOldestTimestamp(tema.getLastModified());
+                }*/
+                //temaCollection.setOldestTimestamp(tema.getLastModified());
                 temaCollection.getTemas().add(tema);
             }
         } catch (SQLException e) {
@@ -118,7 +125,7 @@ public class TemaDAOImpl implements TemaDAO {
 
     @Override
 
-    public Tema updateTemas(String id, String userid, String grupoid, String nombre, String comentario) throws SQLException {
+    public Tema updateTemas(String id, String nombre) throws SQLException {
         Tema tema = null;
 
         Connection connection = null;
@@ -128,10 +135,8 @@ public class TemaDAOImpl implements TemaDAO {
 
             stmt = connection.prepareStatement(TemaDAOQuery.UPDATE_TEMA);
             stmt.setString(1, id);
-            stmt.setString(2, userid);
-            stmt.setString(3, grupoid);
-            stmt.setString(4, nombre);
-            stmt.setString(5, comentario);
+            stmt.setString(2, nombre);
+            //stmt.setString(5, comentario);
 
 
             int rows = stmt.executeUpdate();
