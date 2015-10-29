@@ -117,7 +117,8 @@ public class TemaDAOImpl implements TemaDAO {
     }
 
     @Override
-    public Tema updateTemas(String id, String userid, String grupoid, String nombre) throws SQLException {
+
+    public Tema updateTemas(String id, String userid, String grupoid, String nombre, String comentario) throws SQLException {
         Tema tema = null;
 
         Connection connection = null;
@@ -126,10 +127,11 @@ public class TemaDAOImpl implements TemaDAO {
             connection = Database.getConnection();
 
             stmt = connection.prepareStatement(TemaDAOQuery.UPDATE_TEMA);
-            stmt.setString(1,nombre);
-            stmt.setString(2, id);
+            stmt.setString(1, id);
+            stmt.setString(2, userid);
             stmt.setString(3, grupoid);
-            stmt.setString(4, userid);
+            stmt.setString(4, nombre);
+            stmt.setString(5, comentario);
 
 
             int rows = stmt.executeUpdate();

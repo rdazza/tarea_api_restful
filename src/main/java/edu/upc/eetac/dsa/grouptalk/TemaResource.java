@@ -73,7 +73,7 @@ public class TemaResource {
             throw new InternalServerErrorException();
         }
     }
-
+/*
     @Path("/{id}")
     @PUT
     @Consumes(GrouptalkMediaType.GROUPTALK_TEMA)
@@ -90,7 +90,7 @@ public class TemaResource {
 
         TemaDAO temaDAO = new TemaDAOImpl();
         try {
-            tema = temaDAO.updateTemas(id, tema.getGrupoid(), tema.getComentario());
+            tema = temaDAO.updateTemas(id, tema.getGrupoid(), tema.getNombre(), tema.getComentario());
             if(tema == null)
                 throw new NotFoundException("Tema with id = "+id+" doesn't exist");
         } catch (SQLException e) {
@@ -98,6 +98,7 @@ public class TemaResource {
         }
         return tema;
     }
+   */
     @Path("/{id}")
     @DELETE
     public void deleteTema(@PathParam("id") String id) {
